@@ -27,7 +27,7 @@ body {
     padding-right: 60px;
 }
 
-.section-title:hover {
+.section-title:hover, .footer-links a:hover {
     color: var(--primary-color);
 }
 
@@ -142,4 +142,53 @@ body {
         height: 300px;
         width: 23rem;
     }
+}
+
+/* Footer Section */
+.footer {
+  background: var(--color-dark-200);
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.footer-logo {
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  width: 180px;
+  height: 100px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--color-light);
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.footer-text {
+  color: var(--color-gray-light);
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* Footer Responsive */
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: row;
+    margin-bottom: 35px;
+    gap: 20px;
+  }
 }
