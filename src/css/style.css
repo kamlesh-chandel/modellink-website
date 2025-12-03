@@ -1,4 +1,4 @@
-@import url('./constants/colors.css');
+@import url("./constants/color.css");
 
 body {
   margin: 0;
@@ -14,37 +14,23 @@ body {
 /* Navbar */
 .navbar {
   width: 100%;
-  position: absolute;
-  padding: 20px 30px;
-  box-sizing: border-box;
+  position: fixed;
   top: 0;
   left: 0;
+  padding: 18px 30px;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: transparent;
-  z-index: 10;
+  background: rgba(14, 14, 14, 0.55);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 999;
 }
 
-.nav-logo {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--color-white);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.nav-logo span {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--color-white);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  display: inline-block;
-  border-bottom: 3px solid #e91e63;
-  width: 60%;
-  padding-bottom: 6px;
-  text-align: left;
+.logo-img {
+  width: 8rem;
+  height: 4rem;
 }
 
 .nav-links {
@@ -57,7 +43,7 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: #f1f1f1;
+  color: var(--color-white);
   font-size: 1rem;
   font-weight: 400;
 }
@@ -88,8 +74,9 @@ body {
   }
 
   .nav-links {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 15px;
     padding: 0;
     width: 100%;
@@ -104,23 +91,26 @@ body {
 /* HERO SECTION */
 .hero {
   width: 100%;
-  height: 100vh;
-  background-image: url("../assets/images/hero-bg.png");
+  height: 98vh;
+  background-image: url("../assets/images/hero-bg.png"),url("../assets/images/hero-bg-fallback.png");
   background-size: cover;
   background-position: center;
-}
-
-.hero-layer {
-  background: var(--overlay-dark);
-  z-index: 1;
-  width: 100%;
-  height: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-dark);
+  z-index: 1;
+}
+
 .hero-content {
+  position: relative;
   z-index: 2;
   text-align: center;
   max-width: 1050px;
@@ -132,6 +122,11 @@ body {
   font-weight: 700;
   color: var(--color-white);
   margin-bottom: 20px;
+}
+
+.hero-content h1:hover {
+  color: var(--primary-color);
+  transition: color 0.3s;
 }
 
 .hero-content p {
