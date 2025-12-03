@@ -1,10 +1,4 @@
-:root {
-  --primary-color: #E91E63;
-  --text-white: #ffffff;
-  --text-light: #f1f1f1;
-  --text-gray: hsl(0, 6%, 84%);
-  --hero-overlay: rgba(44, 39, 39, 0.45);
-}
+@import url('./constants/colors.css');
 
 body {
   margin: 0;
