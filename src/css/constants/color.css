@@ -1,0 +1,9 @@
+:root {
+  --primary-color: #E91E63;
+  --color-white: #ffffff;
+  --color-light: #f1f1f1;
+  --color-gray-light: hsl(0, 6%, 84%);
+  --overlay-dark: rgba(44, 39, 39, 0.45);
+  --color-dark-100: #282727;
+  --color-dark-200: #1a1a1a;
+}
