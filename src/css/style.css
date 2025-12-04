@@ -48,6 +48,10 @@ body {
 }
 
 .hero-content h1:hover {
+    color: var(--primary-color);
+    transition: color 0.3s;
+}
+
 /* Navbar */
 .navbar {
   width: 100%;
@@ -112,6 +116,8 @@ body {
 
   .hero-content p {
     font-size: 1.1rem;
+  }
+}
 /* Responsive Navbar */
 @media (max-width: 768px) {
   .navbar {
