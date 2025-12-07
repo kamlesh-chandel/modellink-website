@@ -10,7 +10,7 @@
   <body>
     <!-- Create Models Section -->
     <section class="create-model-section">
-      <h2 class="section-title">Add New Model</h2>
+        <h2 class="section-title">Add New Model</h2>
       <form id="modelForm" class="model-form">
         <div class="input-wrapper">
           <label for="modelName" class="input-label">Model Name*</label>
@@ -29,13 +29,17 @@
           <label for="modelImage" class="input-label">Image*</label>
           <input type="url" id="modelImage" placeholder="Image URL" required />
         </div>
-        <div class="input-wrapper">
-          <label for="modelBio" class="input-label">Bio*</label>
-          <textarea id="modelBio" placeholder="Short Bio" required></textarea>
-        </div>
         <button type="submit">Create Model</button>
       </form>
     </section>
+    <!-- Read Models Section -->
+    <section class="models-section">
+      <div class="title-wrapper">
+        <h2 class="section-title">All Models</h2>
+      </div>
+      <div id="modelsContainer" class="models-wrapper"></div>
+    </section>
+
     <script src="./js/models.js"></script>
   </body>
 </html>

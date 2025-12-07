@@ -50,17 +50,18 @@
   background: var(--accent-rose-light);
 }
 
+/* Create Models Responsive */
 @media (max-width: 768px) {
   .create-model-section {
     max-width: 270px;
-    margin: 40px auto;
+    margin-bottom: -20px;
   }
 
-  .create-model-section h2{
+  .create-model-section h2 {
     margin-top: -1px;
   }
 
-  .model-form button{
+  .model-form button {
     margin-top: 10px;
   }
 }
