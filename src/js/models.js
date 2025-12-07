@@ -21,7 +21,7 @@ function renderModels() {
 
   if (models.length === 0) {
     modelsContainer.innerHTML =
-      "<p style='color:#ccc'>No models added yet.</p>";
+      `<p class="no-models">No models added yet.</p>`;
     return;
   }
 
@@ -33,10 +33,20 @@ function renderModels() {
       <img src="${model.image}" alt="${model.name}" />
       <h3>${model.name}</h3>
       <p>${model.category}</p>
+      <button class="delete-btn" onclick="deleteModel(${model.id})">Delete</button>
     `;
-
     modelsContainer.appendChild(card);
   });
+}
+
+function deleteModel(id) {
+  const confirmDelete = confirm("Are you sure you want to delete this model?");
+  if (!confirmDelete) return;
+
+  const models = getModels().filter((model) => model.id !== id);
+
+  saveModels(models);
+  renderModels();
 }
 
 function getModels() {

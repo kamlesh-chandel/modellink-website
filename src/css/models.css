@@ -65,3 +65,25 @@
     margin-top: 10px;
   }
 }
+
+.no-models {
+  color: var(--champagne-gold);
+  text-align: center;
+  margin-top: 20px;
+}
+
+.delete-btn {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--accent-danger);
+  border: 1px solid var(--accent-danger);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-btn:hover {
+  background: var(--accent-danger);
+  color: var(--black);
+}
