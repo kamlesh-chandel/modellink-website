@@ -1,6 +1,5 @@
-const STORAGE_KEY = "modellink_models";
 const form = document.getElementById("modelForm");
-const modelsContainer = document.getElementById("modelsContainer");
+const container = document.getElementById("modelsContainer");
 const submitBtn = document.getElementById("submitBtn");
 
 let editModelId = null;
@@ -29,10 +28,10 @@ function createModel(e) {
 
 function renderModels() {
   const models = getModels();
-  modelsContainer.innerHTML = "";
+  container.innerHTML = "";
 
   if (models.length === 0) {
-    modelsContainer.innerHTML = `<p class="no-models">No models added yet.</p>`;
+    container.innerHTML = `<p class="no-models">No models added yet.</p>`;
     return;
   }
 
@@ -49,13 +48,13 @@ function renderModels() {
       </button>
       <button class="delete-btn" onclick="deleteModel(${model.id})">Delete</button>
     `;
-    modelsContainer.appendChild(card);
+    container.appendChild(card);
   });
 }
 
 function editModel(id) {
   const models = getModels();
-  const model = models.find((m) => m.id === id);
+  const model = models.find(({ id: modelId }) => modelId === id);
 
   if (!model) return;
 
@@ -72,9 +71,9 @@ function editModel(id) {
 }
 
 function updateModel() {
-  let models = getModels();
+  const models = getModels();
 
-  models = models.map((model) =>
+  const updateModels = models.map((model) =>
     model.id === editModelId
       ? {
           ...model,
@@ -85,7 +84,7 @@ function updateModel() {
       : model
   );
 
-  saveModels(models);
+  saveModels(updateModels);
 
   editModelId = null;
   submitBtn.textContent = "Create Model";
@@ -104,11 +103,11 @@ function deleteModel(id) {
 }
 
 function getModels() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  return JSON.parse(localStorage.getItem("modellink_models")) || [];
 }
 
 function saveModels(models) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(models));
+  localStorage.setItem("modellink_models", JSON.stringify(models));
 }
 
 function createNewModel() {
