@@ -1,6 +1,6 @@
 .create-model-section {
   max-width: 600px;
-  margin: 100px auto;
+  margin: 150px auto;
   padding: 40px;
   background: var(--dark-200);
   border-radius: 10px;
@@ -54,7 +54,7 @@
 @media (max-width: 768px) {
   .create-model-section {
     max-width: 270px;
-    margin-bottom: -20px;
+    margin: 200px auto -20px auto;
   }
 
   .create-model-section h2 {

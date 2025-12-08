@@ -4,13 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modellink - Manage Models</title>
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/models.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/models.css" />
   </head>
   <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-logo">
+        <img
+          loading="lazy"
+          src="../assets/images/website-logo.png"
+          alt="website-logo"
+          class="logo-img"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="#all-models">All Models</a></li>
+      </ul>
+    </nav>
     <!-- Create Models Section -->
     <section class="create-model-section">
-        <h2 class="section-title">Add New Model</h2>
+      <h2 class="section-title">Add New Model</h2>
       <form id="modelForm" class="model-form">
         <div class="input-wrapper">
           <label for="modelName" class="input-label">Model Name*</label>
@@ -33,13 +48,29 @@
       </form>
     </section>
     <!-- Read Models Section -->
-    <section class="models-section">
+    <section id="all-models" class="models-section">
       <div class="title-wrapper">
         <h2 class="section-title">All Models</h2>
       </div>
       <div id="modelsContainer" class="models-wrapper"></div>
     </section>
-
-    <script src="./js/models.js"></script>
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img
+            loading="lazy"
+            src="../assets/images/website-logo.png"
+            alt="website Logo"
+          />
+        </div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="#all-models">All Models</a></li>
+        </ul>
+        <p class="footer-text">© 2025 Modellink. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="../js/models.js"></script>
   </body>
 </html>
