@@ -10,8 +10,9 @@
   --pink-100: #ffebf1;
   --black-50: rgba(14, 14, 14, 0.55);
   --white-08: rgba(255, 255, 255, 0.08);
-  --accent-rose: #D8A48F; 
-  --accent-rose-light: #EAC2B3;
   --accent-danger: #ff8a8a;
+  --rose-400: #d8a48f;
+  --rose-300: #eac2b3;
+  --red-400: #ff8a8a;
   --black: #000000;
 }

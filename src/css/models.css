@@ -38,7 +38,7 @@
 
 .model-form button {
   padding: 12px;
-  background: var(--accent-rose);
+  background: var(--rose-400);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -47,7 +47,7 @@
 }
 
 .model-form button:hover {
-  background: var(--accent-rose-light);
+  background: var(--rose-300);
 }
 
 /* Create Models Responsive */
@@ -76,15 +76,15 @@
   margin-top: 12px;
   padding: 8px 12px;
   background: transparent;
-  color: var(--accent-danger);
-  border: 1px solid var(--accent-danger);
+  color: var(--red-400);
+  border: 1px solid var(--red-400);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .delete-btn:hover {
-  background: var(--accent-danger);
+  background: var(--red-400);
   color: var(--black);
 }
 
@@ -93,14 +93,14 @@
   margin-right: 12px;
   padding: 8px 12px;
   background: transparent;
-  color: var(--accent-rose);
-  border: 1px solid var(--accent-rose);
+  color: var(--rose-400);
+  border: 1px solid var(--rose-400);
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .edit-btn:hover {
-  background: var(--accent-rose);
+  background: var(--rose-400);
   color: var(--black);
 }

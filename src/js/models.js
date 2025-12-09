@@ -66,13 +66,15 @@ function renderModels() {
         <img src="${model.image}" alt="${model.name}" />
         <h3>${model.name}</h3>
         <p>${model.category}</p>
-        <button class="edit-btn" onclick="editModel(${model.id})">
+        <button class="edit-btn">
           Edit
         </button>
-        <button class="delete-btn" onclick="deleteModel(${model.id})">
+        <button class="delete-btn">
           Delete
         </button>
       `;
+      card.querySelector(".edit-btn").addEventListener("click",() => editModel(model.id));
+      card.querySelector(".delete-btn").addEventListener("click",() => deleteModel(model.id));
       container.appendChild(card);
     });
   };
