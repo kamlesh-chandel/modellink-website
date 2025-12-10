@@ -1,0 +1,106 @@
+.create-model-section {
+  max-width: 600px;
+  margin: 150px auto;
+  padding: 40px;
+  background: var(--dark-200);
+  border-radius: 10px;
+}
+
+.create-model-section h2 {
+  text-align: center;
+}
+
+.model-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 10px 0;
+}
+
+.input-label {
+  color: var(--champagne-gold);
+}
+
+.input-wrapper input,
+.input-wrapper textarea {
+  padding: 12px;
+  background: var(--dark-100);
+  border: 1px solid var(--white-08);
+  color: var(--white);
+  border-radius: 6px;
+}
+
+.model-form button {
+  padding: 12px;
+  background: var(--rose-400);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background 0.3s;
+}
+
+.model-form button:hover {
+  background: var(--rose-300);
+}
+
+/* Create Models Responsive */
+@media (max-width: 768px) {
+  .create-model-section {
+    max-width: 270px;
+    margin: 200px auto -20px auto;
+  }
+
+  .create-model-section h2 {
+    margin-top: -1px;
+  }
+
+  .model-form button {
+    margin-top: 10px;
+  }
+}
+
+.no-models {
+  color: var(--champagne-gold);
+  text-align: center;
+  margin-top: 20px;
+}
+
+.delete-btn {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--red-400);
+  border: 1px solid var(--red-400);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-btn:hover {
+  background: var(--red-400);
+  color: var(--black);
+}
+
+.edit-btn {
+  margin-top: 12px;
+  margin-right: 12px;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--rose-400);
+  border: 1px solid var(--rose-400);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.edit-btn:hover {
+  background: var(--rose-400);
+  color: var(--black);
+}

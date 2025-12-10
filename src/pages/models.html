@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modellink - Manage Models</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/models.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-logo">
+        <img
+          loading="lazy"
+          src="../assets/images/website-logo.png"
+          alt="website-logo"
+          class="logo-img"
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="#all-models">All Models</a></li>
+      </ul>
+    </nav>
+    <!-- Create Models Section -->
+    <section class="create-model-section">
+      <h2 class="section-title">Add New Model</h2>
+      <form id="modelForm" class="model-form">
+        <div class="input-wrapper">
+          <label for="modelName" class="input-label">Model Name*</label>
+          <input type="text" id="modelName" placeholder="Model Name" required />
+        </div>
+        <div class="input-wrapper">
+          <label for="modelCategory" class="input-label">Category*</label>
+          <input
+            type="text"
+            id="modelCategory"
+            placeholder="Category (Runway, Editorial)"
+            required
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="modelImage" class="input-label">Image*</label>
+          <input type="url" id="modelImage" placeholder="Image URL" required />
+        </div>
+        <button type="submit" id="submitBtn">Create Model</button>
+      </form>
+    </section>
+    <!-- Read Models Section -->
+    <section id="all-models" class="models-section">
+      <div class="title-wrapper">
+        <h2 class="section-title">All Models</h2>
+      </div>
+      <div id="modelsContainer" class="models-wrapper"></div>
+    </section>
+    <script src="../../src/utils/constants.js"></script>
+    <script src="../js/models.js"></script>
+  </body>
+</html>
