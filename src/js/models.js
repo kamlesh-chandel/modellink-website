@@ -1,137 +1,137 @@
-let db;
-
+import { API_BASE_URL } from "../utils/constants.js";
 const form = document.getElementById("modelForm");
 const container = document.getElementById("modelsContainer");
 const submitBtn = document.getElementById("submitBtn");
+const modelSectionTitle = document.getElementById("modelSectionTitle");
 
 let editModelId = null;
 
 form.addEventListener("submit", handleSubmit);
-document.addEventListener("DOMContentLoaded", initDB);
+document.addEventListener("DOMContentLoaded", fetchModels);
 
-function initDB() {
-  const request = indexedDB.open(DB_NAME, DB_VERSION);
-  request.onupgradeneeded = (e) => { //it runs when db is created for the first time,
-    const database = e.target.result;
-    if (!database.objectStoreNames.contains(STORE_NAME)) {
-      database.createObjectStore(STORE_NAME, {
-        keyPath: "id",
-      });
-    }
-  };
-  request.onsuccess = () => {
-    db = request.result;
-    renderModels();
-  };
-  request.onerror = () => {
-    console.error("Failed to open IndexedDB");
-  };
-}
-
-function handleSubmit(e) {
-  e.preventDefault();
-  if (editModelId !== null) {
-    updateModel();
-  } else {
-    createModel();
-  }
-}
-
-function createModel() {
-  const model = createNewModel();
-  const transaction = db.transaction(STORE_NAME, "readwrite");
-  const store = transaction.objectStore(STORE_NAME);
-  store.add(model);
-  transaction.oncomplete = () => {
-    form.reset();
-    renderModels();
-  };
-}
-
-function renderModels() {
+async function fetchModels() {
   container.innerHTML = "";
-  const transaction = db.transaction(STORE_NAME, "readonly");
-  const store = transaction.objectStore(STORE_NAME);
-  const request = store.getAll();
-  request.onsuccess = () => {
-    const models = request.result;
+  try {
+    const res = await fetch(`${API_BASE_URL}/models`);
+    const result = await res.json();
+    if (!result.success) {
+      container.innerHTML = `<p class="error">${result.message}</p>`;
+      return;
+    }
+    const models = result.data;
     if (models.length === 0) {
       container.innerHTML = `<p class="no-models">No models added yet.</p>`;
       return;
     }
-    models.forEach((model) => {
-      const card = document.createElement("div");
-      card.className = "model-card";
-      card.innerHTML = `
-        <img src="${model.image}" alt="${model.name}" />
-        <h3>${model.name}</h3>
-        <p>${model.category}</p>
-        <button class="edit-btn">
-          Edit
-        </button>
-        <button class="delete-btn">
-          Delete
-        </button>
-      `;
-      card.querySelector(".edit-btn").addEventListener("click",() => editModel(model.id));
-      card.querySelector(".delete-btn").addEventListener("click",() => deleteModel(model.id));
-      container.appendChild(card);
-    });
-  };
+    container.innerHTML = "";
+    models.forEach((model) => renderModelCard(model));
+  } catch (error) {
+    console.error("Error fetching models:", error);
+    container.innerHTML = `<p class="error">Failed to load models</p>`;
+  }
 }
 
-function editModel(id) {
-  const transaction = db.transaction(STORE_NAME, "readonly");
-  const store = transaction.objectStore(STORE_NAME);
-  const request = store.get(id);
-  request.onsuccess = () => {
-    const model = request.result;
-    if (!model) return;
-    document.getElementById("modelName").value = model.name;
-    document.getElementById("modelCategory").value = model.category;
-    document.getElementById("modelImage").value = model.image;
-    editModelId = id;
-    submitBtn.textContent = "Update Model";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+function renderModelCard(model) {
+  const card = document.createElement("div");
+  card.className = "model-card";
+  card.innerHTML = `
+    <img src="${model.image_url}" alt="${model.name}" />
+    <h3>${model.name}</h3>
+    <p>${model.category}</p>
+    <button class="edit-btn">Edit</button>
+    <button class="delete-btn">Delete</button>
+  `;
+  card
+    .querySelector(".edit-btn")
+    .addEventListener("click", () => fillEditForm(model));
+  card
+    .querySelector(".delete-btn")
+    .addEventListener("click", () => deleteModel(model._id));
+
+  container.appendChild(card);
 }
 
-function updateModel() {
-  const transaction = db.transaction(STORE_NAME, "readwrite");
-  const store = transaction.objectStore(STORE_NAME);
-  const updatedModel = {
-    id: editModelId,
+function handleSubmit(e) {
+  e.preventDefault();
+  editModelId ? updateModel() : createModel();
+}
+
+async function createModel() {
+  const model = {
     name: document.getElementById("modelName").value.trim(),
     category: document.getElementById("modelCategory").value.trim(),
-    image: document.getElementById("modelImage").value.trim(),
-    createdAt: new Date().toISOString(),
+    image_url: document.getElementById("modelImage").value.trim(),
   };
-  store.put(updatedModel);
-  transaction.oncomplete = () => {
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/models`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(model),
+    });
+    const result = await res.json();
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+    form.reset();
+    fetchModels();
+  } catch (error) {
+    console.error("Create failed:", error);
+  }
+}
+
+function fillEditForm(model) {
+  document.getElementById("modelName").value = model.name;
+  document.getElementById("modelCategory").value = model.category;
+  document.getElementById("modelImage").value = model.image_url;
+  editModelId = model._id;
+  modelSectionTitle.textContent = "Update Model";
+  submitBtn.textContent = "Update";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+async function updateModel() {
+  const updatedData = {
+    name: document.getElementById("modelName").value.trim(),
+    category: document.getElementById("modelCategory").value.trim(),
+    image_url: document.getElementById("modelImage").value.trim(),
+  };
+  try {
+    const res = await fetch(`${API_BASE_URL}/models/${editModelId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedData),
+    });
+    const result = await res.json();
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
     editModelId = null;
     submitBtn.textContent = "Create Model";
+    modelSectionTitle.textContent = "Add New Model";
     form.reset();
-    renderModels();
-  };
+    fetchModels();
+  } catch (error) {
+    console.error("Update failed:", error);
+  }
 }
 
-function deleteModel(id) {
+async function deleteModel(id) {
   const confirmDelete = confirm("Are you sure you want to delete this model?");
   if (!confirmDelete) return;
-  const transaction = db.transaction(STORE_NAME, "readwrite");
-  const store = transaction.objectStore(STORE_NAME);
-  store.delete(id);
-  transaction.oncomplete = () => {
-    renderModels();
-  };
-}
-
-function createNewModel() {
-  return {
-    id: Date.now(),
-    name: document.getElementById("modelName").value.trim(),
-    category: document.getElementById("modelCategory").value.trim(),
-    image: document.getElementById("modelImage").value.trim(),
-    createdAt: new Date().toISOString(),
-  };
+  try {
+    const res = await fetch(`${API_BASE_URL}/models/${id}`, {
+      method: "DELETE",
+    });
+    const result = await res.json();
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+    fetchModels();
+  } catch (error) {
+    console.error("Delete failed:", error);
+  }
 }

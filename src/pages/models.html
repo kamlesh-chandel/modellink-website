@@ -25,10 +25,10 @@
     </nav>
     <!-- Create Models Section -->
     <section class="create-model-section">
-      <h2 class="section-title">Add New Model</h2>
+      <h2 id="modelSectionTitle" class="section-title">Add New Model</h2>
       <form id="modelForm" class="model-form">
         <div class="input-wrapper">
-          <label for="modelName" class="input-label">Model Name*</label>
+          <label for="modelName" class="input-label">Name*</label>
           <input type="text" id="modelName" placeholder="Model Name" required />
         </div>
         <div class="input-wrapper">
@@ -54,7 +54,7 @@
       </div>
       <div id="modelsContainer" class="models-wrapper"></div>
     </section>
-    <script src="../../src/utils/constants.js"></script>
-    <script src="../js/models.js"></script>
+    <script type="module" src="../../src/utils/constants.js"></script>
+    <script type="module" src="../js/models.js"></script>
   </body>
 </html>
