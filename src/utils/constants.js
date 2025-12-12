@@ -1,3 +1,1 @@
-const DB_NAME = "ModellinkDB";
-const STORE_NAME = "models";
-const DB_VERSION = 1;
+export const API_BASE_URL = "http://localhost:3000/api/v1";
