@@ -46,7 +46,7 @@ function renderModelCard(model) {
     .addEventListener("click", () => fillEditForm(model));
   card
     .querySelector(".delete-btn")
-    .addEventListener("click", () => deleteModel(model._id));
+    .addEventListener("click", () => deleteModel(model.id));
 
   container.appendChild(card);
 }
@@ -86,7 +86,7 @@ function fillEditForm(model) {
   document.getElementById("modelName").value = model.name;
   document.getElementById("modelCategory").value = model.category;
   document.getElementById("modelImage").value = model.image_url;
-  editModelId = model._id;
+  editModelId = model.id;
   modelSectionTitle.textContent = "Update Model";
   submitBtn.textContent = "Update";
   window.scrollTo({ top: 0, behavior: "smooth" });
