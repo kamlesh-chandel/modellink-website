@@ -1,5 +1,5 @@
 const homeModelsWrapper = document.querySelector("#latestModelsContainer");
-import {API_BASE_URL} from "../env.js";
+import {API_BASE_URL} from "../config.js";
 
 async function loadLatestModels() {
   try {
