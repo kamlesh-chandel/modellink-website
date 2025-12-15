@@ -2,7 +2,7 @@ const form = document.getElementById("modelForm");
 const container = document.getElementById("modelsContainer");
 const submitBtn = document.getElementById("submitBtn");
 const modelSectionTitle = document.getElementById("modelSectionTitle");
-import {API_BASE_URL} from "../env.js";
+import {API_BASE_URL} from "../config.js";
 
 let editModelId = null;
 
