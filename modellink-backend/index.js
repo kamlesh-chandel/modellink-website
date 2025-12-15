@@ -29,7 +29,13 @@ app.post("/api/v1/models", async (req, res) => {
     const newModel = await Model.create(req.body);
     return sendResponse(res, HTTP_STATUS.CREATED, true, "Model created successfully", newModel);
   } catch (error) {
-    return sendResponse(res, HTTP_STATUS.BAD_REQUEST, false, error.message, null);
+    return sendResponse(
+      res,
+      HTTP_STATUS.INTERNAL_SERVER_ERROR,
+      false,
+      error.message,
+      null
+    );
   }
 });
 
@@ -60,15 +66,20 @@ app.get("/api/v1/models/latest", async (req, res) => {
 app.put("/api/v1/models/:id", async (req, res) => {
   try {
     const updated = await Model.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
+      new: true, // return the updated document, (by default it returns the old document);
     });
     if (!updated) {
       return sendResponse(res, HTTP_STATUS.NOT_FOUND, false, "Model not found", null);
     }
     return sendResponse(res, HTTP_STATUS.OK, true, "Model updated successfully", updated);
   } catch (error) {
-    return sendResponse(res, HTTP_STATUS.BAD_REQUEST, false, error.message, null);
+    return sendResponse(
+      res,
+      HTTP_STATUS.INTERNAL_SERVER_ERROR,
+      false,
+      error.message,
+      null
+    );
   }
 });
 
