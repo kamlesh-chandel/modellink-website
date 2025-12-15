@@ -1,8 +1,8 @@
-import { API_BASE_URL } from "../utils/constants.js";
 const form = document.getElementById("modelForm");
 const container = document.getElementById("modelsContainer");
 const submitBtn = document.getElementById("submitBtn");
 const modelSectionTitle = document.getElementById("modelSectionTitle");
+import {API_BASE_URL} from "../env.js";
 
 let editModelId = null;
 
@@ -76,6 +76,7 @@ async function createModel() {
     }
     form.reset();
     fetchModels();
+    document.getElementById("modelsContainer").scrollIntoView({ behavior: "smooth" });
   } catch (error) {
     console.error("Create failed:", error);
   }
@@ -113,6 +114,7 @@ async function updateModel() {
     modelSectionTitle.textContent = "Add New Model";
     form.reset();
     fetchModels();
+    document.getElementById("modelsContainer").scrollIntoView({ behavior: "smooth" });
   } catch (error) {
     console.error("Update failed:", error);
   }

@@ -1,5 +1,5 @@
-import { API_BASE_URL } from "../utils/constants.js";
 const homeModelsWrapper = document.querySelector("#latestModelsContainer");
+import {API_BASE_URL} from "../env.js";
 
 async function loadLatestModels() {
   try {
@@ -16,12 +16,13 @@ async function loadLatestModels() {
     }
     homeModelsWrapper.innerHTML = "";
     models.forEach((model) => {
+      const {image_url, name, category} = model;
       const card = document.createElement("div");
       card.className = "model-card";
       card.innerHTML = `
-        <img src="${model.image_url}" alt="${model.name}" />
-        <h3>${model.name}</h3>
-        <p>${model.category}</p>
+        <img src="${image_url}" alt="${name}" />
+        <h3>${name}</h3>
+        <p>${category}</p>
       `;
       homeModelsWrapper.appendChild(card);
     });
