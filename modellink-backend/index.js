@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { sendResponse } from "./utils/api.response.js";
 import { HTTP_STATUS } from "./utils/httpStatus.js";
+import { errorHandler } from "./utils/errorHandler.js";
 
 dotenv.config();
 
@@ -27,24 +28,30 @@ async function connectDB() {
 app.post("/api/v1/models", async (req, res) => {
   try {
     const newModel = await Model.create(req.body);
-    return sendResponse(res, HTTP_STATUS.CREATED, true, "Model created successfully", newModel);
-  } catch (error) {
     return sendResponse(
       res,
-      HTTP_STATUS.INTERNAL_SERVER_ERROR,
-      false,
-      error.message,
-      null
+      HTTP_STATUS.CREATED,
+      true,
+      "Model created successfully",
+      newModel
     );
+  } catch (error) {
+    return errorHandler(res, error);
   }
 });
 
 app.get("/api/v1/models", async (req, res) => {
   try {
     const models = await Model.find().sort({ _id: -1 });
-    return sendResponse(res, HTTP_STATUS.OK, true, "Models fetched successfully", models);
+    return sendResponse(
+      res,
+      HTTP_STATUS.OK,
+      true,
+      "Models fetched successfully",
+      models
+    );
   } catch (error) {
-    return sendResponse(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, false, error.message, null);
+    return errorHandler(res, error);
   }
 });
 
@@ -59,39 +66,66 @@ app.get("/api/v1/models/latest", async (req, res) => {
       models
     );
   } catch (error) {
-    return sendResponse(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, false, error.message, null);
+    return errorHandler(res, error);
   }
 });
 
 app.put("/api/v1/models/:id", async (req, res) => {
   try {
-    const updated = await Model.findByIdAndUpdate(req.params.id, req.body, {
-      new: true, // return the updated document, (by default it returns the old document);
-    });
-    if (!updated) {
-      return sendResponse(res, HTTP_STATUS.NOT_FOUND, false, "Model not found", null);
+    const updated_model = await Model.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (updated_model === null) {
+      return sendResponse(
+        res,
+        HTTP_STATUS.NOT_FOUND,
+        false,
+        "Model not found",
+        null
+      );
     }
-    return sendResponse(res, HTTP_STATUS.OK, true, "Model updated successfully", updated);
-  } catch (error) {
+
     return sendResponse(
       res,
-      HTTP_STATUS.INTERNAL_SERVER_ERROR,
-      false,
-      error.message,
-      null
+      HTTP_STATUS.OK,
+      true,
+      "Model updated successfully",
+      updated_model
     );
+  } catch (error) {
+    return errorHandler(res, error);
   }
 });
 
 app.delete("/api/v1/models/:id", async (req, res) => {
   try {
     const deleted_model = await Model.findByIdAndDelete(req.params.id);
-    if (!deleted_model) {
-      return sendResponse(res, HTTP_STATUS.NOT_FOUND, false, "Model not found", null);
+
+    if (deleted_model === null) {
+      return sendResponse(
+        res,
+        HTTP_STATUS.NOT_FOUND,
+        false,
+        "Model not found",
+        null
+      );
     }
-    return sendResponse(res, HTTP_STATUS.OK, true, "Model deleted successfully", null);
+
+    return sendResponse(
+      res,
+      HTTP_STATUS.OK,
+      true,
+      "Model deleted successfully",
+      null
+    );
   } catch (error) {
-    return sendResponse(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, false, error.message, null);
+    return errorHandler(res, error);
   }
 });
 
