@@ -1,5 +1,5 @@
 const homeModelsWrapper = document.querySelector("#latestModelsContainer");
-import {API_BASE_URL} from "../config.js";
+import { API_BASE_URL } from "../config.js";
 
 async function loadLatestModels() {
   try {
@@ -16,7 +16,7 @@ async function loadLatestModels() {
     }
     homeModelsWrapper.innerHTML = "";
     models.forEach((model) => {
-      const {image_url, name, category} = model;
+      const { image_url, name, category } = model;
       const card = document.createElement("div");
       card.className = "model-card";
       card.innerHTML = `
