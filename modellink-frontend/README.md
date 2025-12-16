@@ -7,6 +7,7 @@
 The application is a React-based implementation of the original HTML/CSS/JavaScript version, redesigned to follow **component-based architecture**, **modern frontend practices**, and **scalable project structure**.
 
 The app consists of:
+
 - A **Landing Page** to present the platform’s vision and featured models
 - A **Models Page (`/models`)** where users can manage model profiles using CRUD operations
 
@@ -17,6 +18,7 @@ The app consists of:
 In the modeling industry, model discovery and profile management are often fragmented across multiple platforms with inconsistent user experience.
 
 **Modellink addresses this by:**
+
 - Centralizing model profile presentation
 - Enabling client-side CRUD operations for easy profile management
 - Providing a clean, responsive, and modern UI built with React
@@ -26,11 +28,13 @@ In the modeling industry, model discovery and profile management are often fragm
 ## High-Level Requirements / Scope
 
 ### Landing Page
+
 - Hero section with branding and visuals
 - Platform overview and featured models
 - Responsive layout across devices
 
 ### Models Page (`/models`)
+
 - List all model profiles
 - Add new models via form
 - Edit existing model details
@@ -39,6 +43,7 @@ In the modeling industry, model discovery and profile management are often fragm
 - Client-side data handling (no backend)
 
 ### General
+
 - Component-based architecture
 - Clean and scalable folder structure
 - Reusable UI components
@@ -61,3 +66,16 @@ In the modeling industry, model discovery and profile management are often fragm
 1. Clone the repository:
    ```bash
    git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd modellink-frontend
+   ```
+3. Install project dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
