@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/models.css" />
   </head>
   <body>
     <!-- NAVBAR -->
@@ -39,28 +40,13 @@
     <!--Models Section-->
     <section id="models" class="models-section">
       <div class="title-wrapper">
-        <h2 class="section-title">Featured Models</h2>
+        <h2 class="section-title">Latest Models</h2>
       </div>
 
-      <div class="models-wrapper">
-        <div class="model-card">
-          <img loading="lazy" src="./assets/images/model1.png" alt="Model 1" />
-          <h3>Mia Torres</h3>
-          <p>Editorial • Runway</p>
-        </div>
-
-        <div class="model-card">
-          <img loading="lazy" src="./assets/images/model2.png" alt="Model 2" />
-          <h3>Ethan Cole</h3>
-          <p>Commercial • Fashion</p>
-        </div>
-
-        <div class="model-card">
-          <img loading="lazy" src="./assets/images/model3.png" alt="Model 3" />
-          <h3>Lara Chen</h3>
-          <p>High Fashion • Portrait</p>
-        </div>
+      <!-- Models Container for DOM manipulation-->
+      <div id="latestModelsContainer" class="models-wrapper">
       </div>
+
     </section>
 
     <!--Agencies Section-->
@@ -137,5 +123,6 @@
         <p class="footer-text">© 2025 Modellink. All rights reserved.</p>
       </div>
     </footer>
+    <script type="module" src="../src/js/latestModels.js"></script>
   </body>
 </html>
